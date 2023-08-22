@@ -1,0 +1,12 @@
+.painting-layout-root {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    .painting-layout-root {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
