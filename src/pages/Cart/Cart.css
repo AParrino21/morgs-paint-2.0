@@ -1,0 +1,20 @@
+.cart-title-container {
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkout-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 15px;
+  align-items: center;
+}
+
+.cart-img {
+  width: 75%;
+  max-width: 800px;
+}

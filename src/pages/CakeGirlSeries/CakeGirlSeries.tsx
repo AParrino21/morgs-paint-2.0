@@ -7,9 +7,9 @@ import CakeGirlHeader from "../../components/CakeGirlHeader/CakeGirlHeader";
 const CakeGirlSeries = () => {
   return (
     <div>
-        <div>
-            <CakeGirlHeader />
-        </div>
+      <div>
+        <CakeGirlHeader />
+      </div>
       <div>
         <PaintingLayout />
       </div>

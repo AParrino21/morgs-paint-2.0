@@ -1,10 +1,10 @@
 export interface PaintingData {
-  id: string,
-  name: string,
-  image: string,
-  description: string,
-  price: string,
-  quantity: string
+  id: string;
+  name: string;
+  imgUrl: string;
+  size: string;
+  price: number;
+  quantity: number;
 }
 
 export interface childrenProps {
@@ -24,6 +24,7 @@ export interface AuthProviderProps {
   setAlert: (aStatus: string, aMessage: string) => void;
   openAlert: boolean;
   setOpenAlert: (open: boolean) => void;
-  backgrounds: any[]
-  paintings: PaintingData[]
+  paintings: PaintingData[];
+  cartItems: PaintingData[];
+  setCartItems: (cartItem: PaintingData[]) => void;
 }

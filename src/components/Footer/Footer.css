@@ -1,0 +1,15 @@
+.footer-root > div {
+  text-align: center;
+  background: linear-gradient(to bottom, rgb(249, 249, 249), white);;
+  padding: 40px;
+  box-shadow: none;
+}
+
+.footer-root > div > div > div > p {
+    margin-bottom: 15px;
+}
+
+.legal-links {
+  text-decoration: none;
+  color: black;
+}

@@ -1,12 +1,35 @@
 .painting-layout-root {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 20px auto;
+}
+
+.img-card {
+  cursor: pointer;
+}
+
+.viewed-painting-container {
+  text-align: center;
+}
+
+.viewed-painting-img {
+  width: 80%;
+  padding: 20px;
+}
+
+.viewed-painting-btns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 700px) {
-    .painting-layout-root {
-        grid-template-columns: repeat(1, 1fr);
-    }
+  .painting-layout-root {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
