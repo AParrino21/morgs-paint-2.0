@@ -28,6 +28,10 @@
   justify-content: center;
 }
 
+.css-1qvr50w-MuiTypography-root {
+  font-family: Cinzel !important;
+}
+
 @media screen and (max-width: 700px) {
   .painting-layout-root {
     grid-template-columns: repeat(1, 1fr);

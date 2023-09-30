@@ -11,17 +11,35 @@ import {
 } from "@mui/material";
 
 const Cart = () => {
+  const URL = import.meta.env.VITE_APP_MORGS_SERVER;
   const { cartItems, setCartItems } = React.useContext(AuthContext);
 
   function removeFromCart(e: React.MouseEvent<HTMLElement>) {
-    console.log(e.currentTarget.id);
-
-    let newCart = cartItems!.filter((items) => items.id !== e.currentTarget.id);
+    let newCart = cartItems!.filter(
+      (items: any) => items.id && items.id !== e.currentTarget.id || items._id && items._id !== e.currentTarget.id
+    );
     setCartItems(newCart);
     localStorage.setItem(
       "morgs-paint-birthday-girls-cart",
       JSON.stringify(newCart)
     );
+  }
+
+  function checkOutNow() {
+    // fetch(URL + "create-checkout-session", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(cartItems),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     // redirecting the page using url from the backend
+    //     window.location.href = data.url;
+    //   });
+    console.log(`${URL}create-checkout-session`);
   }
 
   return (
@@ -38,36 +56,69 @@ const Cart = () => {
           </div>
           <Divider />
           <div className="checkout-container">
-            <Button variant="outlined" color="success">
+            <Button variant="outlined" color="success" onClick={checkOutNow}>
               CHECK OUT
             </Button>
           </div>
-          {cartItems?.map((item) => (
+          {cartItems?.map((item: any) => (
             <Card
               key={item?.id}
               sx={{ width: "90%", maxWidth: 500, margin: "50px auto" }}
             >
               <CardHeader title={item?.name} />
-              <CardMedia
-                className="img-card"
-                component="img"
-                height="600"
-                image={item?.imgUrl}
-                alt={item?.name}
-                id={item?.id}
-              />
+              {item?.src && (
+                <CardMedia
+                  className="img-card"
+                  component="img"
+                  height="600"
+                  image={item?.src}
+                  alt={item?.name}
+                  id={item?._id}
+                />
+              )}
+              {item?.image && (
+                <CardMedia
+                  className="img-card"
+                  component="img"
+                  height="600"
+                  image={item?.image}
+                  alt={item?.name}
+                  id={item?._id}
+                />
+              )}
+              {item?.imgUrl && (
+                <CardMedia
+                  className="img-card"
+                  component="img"
+                  height="600"
+                  image={item?.imgUrl}
+                  alt={item?.name}
+                  id={item?.id}
+                />
+              )}
               <CardActions
                 sx={{ justifyContent: "center", margin: "20px" }}
                 disableSpacing
               >
-                <Button
-                  variant="outlined"
-                  color="error"
-                  id={item.id}
-                  onClick={(e) => removeFromCart(e)}
-                >
-                  Remove From Cart
-                </Button>
+                {item?.imgUrl ? (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    id={item.id}
+                    onClick={(e) => removeFromCart(e)}
+                  >
+                    Remove From Cart
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    id={item._id}
+                    onClick={(e) => removeFromCart(e)}
+                  >
+                    Remove From Cart
+                  </Button>
+                )}
               </CardActions>
             </Card>
           ))}

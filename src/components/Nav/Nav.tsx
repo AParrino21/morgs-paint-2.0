@@ -36,13 +36,13 @@ const Nav = () => {
           </ListItem>
         </div>
         <div className="nav-links">
-          <div>
+          {/* <div>
             <ListItem>
               <Link className="nav-item" to="/">
                 Home
               </Link>
             </ListItem>
-          </div>
+          </div> */}
           <div>
             <ClickAwayListener onClickAway={clickAwayHandler}>
               <Box>
@@ -51,7 +51,10 @@ const Nav = () => {
                 </ListItem>
                 <Popper open={open} anchorEl={anchorEl}>
                   <Box sx={{ border: 1, p: 0, bgcolor: "background.paper" }}>
-                    <Link className="nav-item" to="/happy-birthday">
+                    {/* <Link className="nav-item" to="/happy-birthday">
+                      <p className="nav-dropdown-item">Birthday Girls</p>
+                    </Link> */}
+                    <Link className="nav-item" to="/">
                       <p className="nav-dropdown-item">Birthday Girls</p>
                     </Link>
                     <Divider />

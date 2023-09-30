@@ -1,0 +1,31 @@
+.header {
+    width: 100%;
+}
+
+.gallery-container {
+    text-align: center;
+}
+
+.gallery-item {
+    margin: 45px auto 90px auto;
+}
+
+.gallery-item > h2 {
+    font-size: 30px;
+}
+
+.gallery-img {
+    width: 95%;
+    max-width: 700px;
+    cursor: pointer;
+}
+
+.gallery-btns {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.gallery-viewed-img {
+    width: 80% !important;
+}

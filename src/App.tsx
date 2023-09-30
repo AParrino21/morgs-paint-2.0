@@ -7,6 +7,8 @@ import CakeGirlSeries from "./pages/CakeGirlSeries/CakeGirlSeries";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
+import Thanks from "./pages/Thanks/Thanks";
+import Gallery from "./pages/Gallery/Gallery";
 
 function App() {
   const { openAlert, setOpenAlert, alertMessage, alertStatus } =
@@ -17,9 +19,12 @@ function App() {
       <Router>
         <Nav/>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/happy-birthday" element={<CakeGirlSeries />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<CakeGirlSeries />} />
+          {/* <Route path="/happy-birthday" element={<CakeGirlSeries />} /> */}
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/thanks" element={<Thanks />} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>
         <Footer />

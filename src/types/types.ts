@@ -18,6 +18,20 @@ export interface AlertProps {
   alertStatus: string;
 }
 
+export interface GalleryData {
+  _id: string;
+  name: string;
+  image?: string;
+  src?: string;
+  size: string;
+  description?: string;
+  bio?: string;
+  price: number;
+  inventory: number;
+  price_id: string;
+  cat: string;
+}
+
 export interface AuthProviderProps {
   alertMessage: string;
   alertStatus: string;
@@ -25,6 +39,9 @@ export interface AuthProviderProps {
   openAlert: boolean;
   setOpenAlert: (open: boolean) => void;
   paintings: PaintingData[];
-  cartItems: PaintingData[];
+  cartItems: any;
   setCartItems: (cartItem: PaintingData[]) => void;
+  oils: GalleryData[];
+  mixedMedia: GalleryData[];
+  addToCart: (painting: GalleryData | PaintingData) => void
 }

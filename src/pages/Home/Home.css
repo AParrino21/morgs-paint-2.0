@@ -1,0 +1,14 @@
+.home-header {
+    width: 100%;
+}
+
+.featured-container {
+    margin: 25px;
+    text-align: center;
+}
+
+.featured-img {
+    width: 90%;
+    max-width: 350px;
+    border-radius: 10px;
+}

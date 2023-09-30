@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AuthProviderProps, PaintingData, childrenProps } from "../types";
+import { AuthProviderProps, GalleryData, PaintingData, childrenProps } from "../types";
 import axios from "axios";
 
 export const AuthContext = React.createContext({} as AuthProviderProps);
@@ -12,12 +12,34 @@ export const AuthProvider = ({ children }: childrenProps) => {
   const [paintings, setPaintings] = React.useState<PaintingData[]>([]);
   const [cartItems, setCartItems] = React.useState<PaintingData[]>([]);
 
+  const [oils, setOils] = React.useState([])
+  const [mixedMedia, setMixedMedia] = React.useState([])
+
   const url = import.meta.env.VITE_APP_MORGS_API_URL;
+  const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
 
   function setAlert(aStatus: string, aMessage: string) {
     setOpenAlert(true);
     setAlertStatus(aStatus);
     setAlertMessage(aMessage);
+  }
+
+  const getAllOils = async () => {
+    try {
+      const response = await axios.get(sUrl + 'api/paintings/oils')
+      setOils(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getAllMixedMedia = async () => {
+    try {
+      const response = await axios.get(sUrl + 'api/paintings/mixedmedia')
+      setMixedMedia(response.data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function getPaintings() {
@@ -37,9 +59,26 @@ export const AuthProvider = ({ children }: childrenProps) => {
     }
   }
 
+  function addToCart(painting: PaintingData | GalleryData) {
+    let storage: any = localStorage.getItem("morgs-paint-birthday-girls-cart");
+    if (!storage) {
+      storage = [];
+    } else {
+      storage = JSON.parse(storage);
+    }
+    storage.push(painting);
+    localStorage.setItem(
+      "morgs-paint-birthday-girls-cart",
+      JSON.stringify(storage)
+    );
+    setCartItems(storage);
+  }
+
   React.useEffect(() => {
     getPaintings();
     getCartItems();
+    getAllOils();
+    getAllMixedMedia();
   }, []);
 
   return (
@@ -53,6 +92,9 @@ export const AuthProvider = ({ children }: childrenProps) => {
         paintings,
         cartItems,
         setCartItems,
+        oils,
+        mixedMedia,
+        addToCart
       }}
     >
       {children}

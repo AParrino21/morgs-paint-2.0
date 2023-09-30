@@ -11,7 +11,7 @@ import {
 import { PaintingData } from "../../types";
 
 const PaintingLayout = () => {
-  const { paintings, setCartItems } = React.useContext(AuthContext);
+  const { paintings, addToCart } = React.useContext(AuthContext);
   const [paintingPage, setPaintingPage] = React.useState<number>(0);
   const [viewdPainting, setViewedPainting] = React.useState<
     PaintingData[] | null
@@ -25,21 +25,6 @@ const PaintingLayout = () => {
     setViewedPainting(clickedPainting);
   }
 
-  function addToCart(painting: PaintingData) {
-    let storage: any = localStorage.getItem("morgs-paint-birthday-girls-cart");
-    if (!storage) {
-      storage = [];
-    } else {
-      storage = JSON.parse(storage);
-    }
-    storage.push(painting);
-    localStorage.setItem(
-      "morgs-paint-birthday-girls-cart",
-      JSON.stringify(storage)
-    );
-    setCartItems(storage);
-  }
-
   return (
     <>
       {paintingPage === 0 && (
@@ -49,13 +34,13 @@ const PaintingLayout = () => {
             .map((painting) => (
               <Card
                 key={painting?.id}
-                sx={{ width: "90%", maxWidth: 500, margin: "20px auto" }}
+                sx={{ width: "90%", maxWidth: 500, margin: "20px auto", textAlign: "center" }}
               >
-                <CardHeader title={painting?.name} />
+                <CardHeader sx={{fontFamily: "Cinzel !important"}} title={painting?.name} />
                 <CardMedia
                   className="img-card"
                   component="img"
-                  height="600"
+                  height="800"
                   image={painting?.imgUrl}
                   alt={painting?.name}
                   id={painting?.id}
