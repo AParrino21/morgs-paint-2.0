@@ -1,6 +1,11 @@
 import React from "react";
 
-import { AuthProviderProps, GalleryData, PaintingData, childrenProps } from "../types";
+import {
+  AuthProviderProps,
+  GalleryData,
+  PaintingData,
+  childrenProps,
+} from "../types";
 import axios from "axios";
 
 export const AuthContext = React.createContext({} as AuthProviderProps);
@@ -11,11 +16,12 @@ export const AuthProvider = ({ children }: childrenProps) => {
   const [openAlert, setOpenAlert] = React.useState<boolean>(false);
   const [paintings, setPaintings] = React.useState<PaintingData[]>([]);
   const [cartItems, setCartItems] = React.useState<PaintingData[]>([]);
+  const [header, setHeader] = React.useState<string>("");
+  const [contactPic, setContactPic] = React.useState<string>("")
 
-  const [oils, setOils] = React.useState([])
-  const [mixedMedia, setMixedMedia] = React.useState([])
+  const [oils, setOils] = React.useState([]);
+  const [mixedMedia, setMixedMedia] = React.useState([]);
 
-  const url = import.meta.env.VITE_APP_MORGS_API_URL;
   const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
 
   function setAlert(aStatus: string, aMessage: string) {
@@ -26,26 +32,30 @@ export const AuthProvider = ({ children }: childrenProps) => {
 
   const getAllOils = async () => {
     try {
-      const response = await axios.get(sUrl + 'api/paintings/oils')
-      setOils(response.data)
+      const response = await axios.get(sUrl + "api/paintings/oils");
+      setOils(response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const getAllMixedMedia = async () => {
     try {
-      const response = await axios.get(sUrl + 'api/paintings/mixedmedia')
-      setMixedMedia(response.data)
+      const response = await axios.get(sUrl + "api/paintings/mixedmedia");
+      setMixedMedia(response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   async function getPaintings() {
     try {
-      const response = await axios.get(`${url}cakeGirls`);
+      const response = await axios.get(sUrl + "api/paintings/getCakeGirls");
+      const headerResponse = await axios.get(sUrl + "api/paintings/getHeader");
+      const contactPicResponse = await axios.get(sUrl + "api/paintings/getContactPic")
       setPaintings(response.data);
+      setHeader(headerResponse.data[0].header);
+      setContactPic(contactPicResponse.data[0].contactPicUrl)
     } catch (error) {
       console.log(error);
     }
@@ -94,7 +104,9 @@ export const AuthProvider = ({ children }: childrenProps) => {
         setCartItems,
         oils,
         mixedMedia,
-        addToCart
+        addToCart,
+        header,
+        contactPic,
       }}
     >
       {children}

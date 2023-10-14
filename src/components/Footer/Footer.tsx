@@ -43,6 +43,15 @@ const Footer = () => {
               color="text.secondary"
               gutterBottom
             >
+              <Link className="legal-links" to="/returns">
+                Refunds
+              </Link>
+            </Typography>
+            <Typography
+              sx={{ fontSize: 12 }}
+              color="text.secondary"
+              gutterBottom
+            >
               <Link className="legal-links" to="/contact">
                 Contact
               </Link>

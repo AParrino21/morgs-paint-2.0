@@ -1,0 +1,13 @@
+.legal {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.legal > header {
+    text-align: center;
+}
+
+.legal > div > section {
+    margin-bottom: 30px;
+}

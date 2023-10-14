@@ -9,6 +9,11 @@ import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
 import Thanks from "./pages/Thanks/Thanks";
 import Gallery from "./pages/Gallery/Gallery";
+import Terms from "./pages/Legal/Terms";
+import Privacy from "./pages/Legal/Privacy";
+import Cookies from "./pages/Legal/Cookies";
+import Contact from "./pages/Contact/Contact";
+import Returns from "./pages/Legal/Returns";
 
 function App() {
   const { openAlert, setOpenAlert, alertMessage, alertStatus } =
@@ -25,6 +30,11 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/thanks" element={<Thanks />} />
+          <Route path="/terms-of-use" element={<Terms />} />
+          <Route path="/privacy-policy" element={<Privacy />} />
+          <Route path="/cookie-policy" element={<Cookies />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/returns" element={<Returns />} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>
         <Footer />

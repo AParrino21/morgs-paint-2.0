@@ -5,6 +5,7 @@ export interface PaintingData {
   size: string;
   price: number;
   quantity: number;
+  price_id: string;
 }
 
 export interface childrenProps {
@@ -43,5 +44,7 @@ export interface AuthProviderProps {
   setCartItems: (cartItem: PaintingData[]) => void;
   oils: GalleryData[];
   mixedMedia: GalleryData[];
-  addToCart: (painting: GalleryData | PaintingData) => void
+  addToCart: (painting: GalleryData | PaintingData) => void;
+  header: string;
+  contactPic: string;
 }

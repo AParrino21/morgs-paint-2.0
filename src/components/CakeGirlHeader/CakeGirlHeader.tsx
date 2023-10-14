@@ -1,11 +1,13 @@
 import React from 'react'
 import './CakeGirlHeader.css'
+import { AuthContext } from "../../context/AuthContext";
 
 const CakeGirlHeader = () => {
-  const sURL = import.meta.env.VITE_APP_MORGS_S_URL;
+  const { header } = React.useContext(AuthContext);
+  
   return (
     <div>
-        <img className="header-img" src={`${sURL}header/E0D75339-B83F-40BC-93CF-486F9DB5479C.jpeg`} alt="header" />
+        <img className="header-img" src={header} alt="header" />
     </div>
   )
 }

@@ -1,0 +1,31 @@
+.contact {
+    width: 80%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.contact > header {
+    text-align: center;
+}
+
+.contact > div > div {
+    display: flex;
+    align-items: start;
+    gap: 50px;
+}
+
+.contact-img {
+    width: 80%;
+    max-width: 600px;
+}
+
+@media screen and (max-width: 900px) {
+    .contact > div > div {
+        display: block;
+        text-align: center;
+    }
+
+    .contact-img {
+        margin-bottom: 50px;
+    }
+}

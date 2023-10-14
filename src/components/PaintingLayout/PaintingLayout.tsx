@@ -34,9 +34,17 @@ const PaintingLayout = () => {
             .map((painting) => (
               <Card
                 key={painting?.id}
-                sx={{ width: "90%", maxWidth: 500, margin: "20px auto", textAlign: "center" }}
+                sx={{
+                  width: "90%",
+                  maxWidth: 500,
+                  margin: "20px auto",
+                  textAlign: "center",
+                }}
               >
-                <CardHeader sx={{fontFamily: "Cinzel !important"}} title={painting?.name} />
+                <CardHeader
+                  sx={{ fontFamily: "Cinzel !important" }}
+                  title={painting?.name}
+                />
                 <CardMedia
                   className="img-card"
                   component="img"
