@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }: childrenProps) => {
   const [cartItems, setCartItems] = React.useState<PaintingData[]>([]);
   const [header, setHeader] = React.useState<string>("");
   const [contactPic, setContactPic] = React.useState<string>("")
+  const [galleryHeader, setGalleryHeader] = React.useState<string>("")
 
   const [oils, setOils] = React.useState([]);
   const [mixedMedia, setMixedMedia] = React.useState([]);
@@ -53,9 +54,11 @@ export const AuthProvider = ({ children }: childrenProps) => {
       const response = await axios.get(sUrl + "api/paintings/getCakeGirls");
       const headerResponse = await axios.get(sUrl + "api/paintings/getHeader");
       const contactPicResponse = await axios.get(sUrl + "api/paintings/getContactPic")
+      const galleryHeaderResponse = await axios.get(sUrl + "api/paintings/getGalleryHeader")
       setPaintings(response.data);
       setHeader(headerResponse.data[0].header);
       setContactPic(contactPicResponse.data[0].contactPicUrl)
+      setGalleryHeader(galleryHeaderResponse.data[0].galleryHeader)
     } catch (error) {
       console.log(error);
     }
@@ -107,6 +110,7 @@ export const AuthProvider = ({ children }: childrenProps) => {
         addToCart,
         header,
         contactPic,
+        galleryHeader,
       }}
     >
       {children}

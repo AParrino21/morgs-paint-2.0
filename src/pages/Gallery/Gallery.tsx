@@ -5,7 +5,7 @@ import { GalleryData } from "../../types";
 import { Button } from "@mui/material";
 
 const Gallery = () => {
-  const { oils, mixedMedia, addToCart } = React.useContext(AuthContext);
+  const { oils, mixedMedia, addToCart, galleryHeader } = React.useContext(AuthContext);
   const [paintingPage, setPaintingPage] = React.useState<number>(0);
   const [chosenPainting, setChosenPainting] = React.useState<
     GalleryData[] | null
@@ -37,7 +37,7 @@ const Gallery = () => {
           <div>
             <img
               className="header"
-              src="https://goobisanubis.s3.amazonaws.com/morgsArt/cakeGirlSeries/header/morganNavHeader.JPG"
+              src={galleryHeader}
               alt="header"
             />
           </div>

@@ -47,4 +47,5 @@ export interface AuthProviderProps {
   addToCart: (painting: GalleryData | PaintingData) => void;
   header: string;
   contactPic: string;
+  galleryHeader: string;
 }
