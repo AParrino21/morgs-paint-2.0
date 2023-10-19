@@ -14,15 +14,34 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const Nav = () => {
   const { cartItems } = React.useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [openSeries, setOpenSeries] = React.useState<boolean>(false);
 
-  function handleClick(event: React.MouseEvent<HTMLElement>) {
+  const [anchorElSocials, setAnchorElSocails] =
+    React.useState<null | HTMLElement>(null);
+  const [openSocials, setOpenSocials] = React.useState<boolean>(false);
+
+  function handleSeriesClick(event: React.MouseEvent<HTMLElement>) {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    setOpen(!open);
+    setOpenSeries(!openSeries);
+
+    setAnchorElSocails(null);
+    setOpenSocials(false);
   }
-  function clickAwayHandler() {
+
+  function handleSocialsClick(event: React.MouseEvent<HTMLElement>) {
+    setAnchorElSocails(anchorElSocials ? null : event.currentTarget);
+    setOpenSocials(!openSocials);
+
     setAnchorEl(null);
-    setOpen(false);
+    setOpenSeries(false);
+  }
+
+  function clickAwayHandler() {
+    setAnchorElSocails(null);
+    setOpenSocials(false);
+
+    setAnchorEl(null);
+    setOpenSeries(false);
   }
 
   return (
@@ -36,33 +55,71 @@ const Nav = () => {
           </ListItem>
         </div>
         <div className="nav-links">
-          {/* <div>
-            <ListItem>
-              <Link className="nav-item" to="/">
-                Home
-              </Link>
-            </ListItem>
-          </div> */}
-          <div>
-            <ClickAwayListener onClickAway={clickAwayHandler}>
-              <Box>
-                <ListItem className="nav-item-series" onClick={handleClick}>
-                  Series
-                </ListItem>
-                <Popper open={open} anchorEl={anchorEl}>
-                  <Box sx={{ border: 1, p: 0, bgcolor: "background.paper" }}>
-                    {/* <Link className="nav-item" to="/happy-birthday">
-                      <p className="nav-dropdown-item">Birthday Girls</p>
-                    </Link> */}
-                    <Link className="nav-item" to="/">
-                      <p className="nav-dropdown-item">Birthday Girls</p>
-                    </Link>
-                    <Divider />
-                  </Box>
-                </Popper>
-              </Box>
-            </ClickAwayListener>
-          </div>
+          <ClickAwayListener onClickAway={clickAwayHandler}>
+            <>
+              <div>
+                <Box>
+                  <ListItem
+                    className="nav-item-series"
+                    onClick={handleSocialsClick}
+                  >
+                    Socials
+                  </ListItem>
+                  <Popper open={openSocials} anchorEl={anchorElSocials}>
+                    <Box sx={{ border: 1, p: 0, bgcolor: "background.paper" }}>
+                      <Link
+                        className="nav-item"
+                        to="https://www.instagram.com/watchmorganpaint/"
+                      >
+                        <p className="nav-dropdown-item">Instagram</p>
+                      </Link>
+                      <Divider />
+                      <Link
+                        className="nav-item"
+                        to="https://www.tiktok.com/@watchmorgspaint"
+                      >
+                        <p className="nav-dropdown-item">TikTok</p>
+                      </Link>
+                      <Divider />
+                      <Link
+                        className="nav-item"
+                        to="https://society6.com/morgandanton"
+                      >
+                        <p className="nav-dropdown-item">Society 6</p>
+                      </Link>
+                      <Divider />
+                      <Link
+                        className="nav-item"
+                        to="https://www.redbubble.com/people/morgandantonart/shop"
+                      >
+                        <p className="nav-dropdown-item">Red Bubble</p>
+                      </Link>
+                      <Divider />
+                    </Box>
+                  </Popper>
+                </Box>
+              </div>
+
+              <div>
+                <Box>
+                  <ListItem
+                    className="nav-item-series"
+                    onClick={handleSeriesClick}
+                  >
+                    Series
+                  </ListItem>
+                  <Popper open={openSeries} anchorEl={anchorEl}>
+                    <Box sx={{ border: 1, p: 0, bgcolor: "background.paper" }}>
+                      <Link className="nav-item" to="/">
+                        <p className="nav-dropdown-item">Birthday Girls</p>
+                      </Link>
+                      <Divider />
+                    </Box>
+                  </Popper>
+                </Box>
+              </div>
+            </>
+          </ClickAwayListener>
           <div>
             <ListItem>
               <Link className="nav-item" to="/gallery">
