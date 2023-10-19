@@ -55,7 +55,6 @@ const PaintingLayout = () => {
                 <CardMedia
                   className="img-card"
                   component="img"
-                  height="800"
                   image={painting?.imgUrl}
                   alt={painting?.name}
                   id={painting?.id}
