@@ -87,6 +87,23 @@ export const AuthProvider = ({ children }: childrenProps) => {
     setCartItems(storage);
   }
 
+  const subtractInventory = async (data: GalleryData[] | PaintingData[]) => {
+    try {
+      const response = await axios.put(sUrl + 'api/paintings/subtract', data)
+      console.log(response)
+      if (response) {
+        localStorage.clear()
+        setCartItems([])
+        
+        getPaintings();
+        getAllOils();
+        getAllMixedMedia();
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   React.useEffect(() => {
     getPaintings();
     getCartItems();
@@ -111,6 +128,7 @@ export const AuthProvider = ({ children }: childrenProps) => {
         header,
         contactPic,
         galleryHeader,
+        subtractInventory
       }}
     >
       {children}

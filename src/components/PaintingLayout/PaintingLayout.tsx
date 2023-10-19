@@ -11,11 +11,12 @@ import {
 import { PaintingData } from "../../types";
 
 const PaintingLayout = () => {
-  const { paintings, addToCart } = React.useContext(AuthContext);
+  const { paintings, addToCart, cartItems } = React.useContext(AuthContext);
   const [paintingPage, setPaintingPage] = React.useState<number>(0);
   const [viewdPainting, setViewedPainting] = React.useState<
     PaintingData[] | null
   >(null);
+  const [paintingIsInCart, setPaintingIsInCart] = React.useState<boolean[]>([]);
 
   function viewPainting(e: React.MouseEvent<HTMLElement>) {
     let clickedPainting = paintings.filter(
@@ -23,6 +24,12 @@ const PaintingLayout = () => {
     );
     setPaintingPage(1);
     setViewedPainting(clickedPainting);
+
+    let isInCart = cartItems.map(
+      (i: any) => i.name === clickedPainting[0].name
+    );
+    const resultArray = isInCart.filter((value: boolean) => value === true);
+    setPaintingIsInCart(resultArray);
   }
 
   return (
@@ -63,7 +70,14 @@ const PaintingLayout = () => {
       )}
       {paintingPage === 1 && (
         <div>
-          <Button onClick={() => setPaintingPage(0)}>BACK</Button>
+          <Button
+            onClick={() => {
+              setPaintingPage(0);
+              setViewedPainting(null);
+            }}
+          >
+            BACK
+          </Button>
           <br />
           {viewdPainting?.map((painting) => (
             <div key={painting?.id} className="viewed-painting-container">
@@ -85,18 +99,49 @@ const PaintingLayout = () => {
                 )}
               </div>
               <br />
-              <div className="viewed-painting-btns">
-                <Button onClick={() => addToCart(painting)} variant="outlined">
-                  Add To Cart
-                </Button>
-                <Button
-                  onClick={() => setPaintingPage(0)}
-                  variant="outlined"
-                  color="error"
-                >
-                  Go Back
-                </Button>
-              </div>
+              {painting?.quantity != 0 ? (
+                <div className="viewed-painting-btns">
+                  {paintingIsInCart[0] && (
+                    <Button disabled variant="outlined">
+                      IN CART!
+                    </Button>
+                  )}
+                  {paintingIsInCart?.length === 0 && (
+                    <Button
+                      onClick={() => {
+                        addToCart(painting);
+                        setPaintingIsInCart([true]);
+                      }}
+                      variant="outlined"
+                    >
+                      Add To Cart
+                    </Button>
+                  )}
+                  <Button
+                    onClick={() => {
+                      setPaintingPage(0);
+                      setViewedPainting(null);
+                    }}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Go Back
+                  </Button>
+                </div>
+              ) : (
+                <div className="viewed-painting-btns">
+                  <Button
+                    onClick={() => {
+                      setPaintingPage(0);
+                      setViewedPainting(null);
+                    }}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Go Back
+                  </Button>
+                </div>
+              )}
               <br />
             </div>
           ))}

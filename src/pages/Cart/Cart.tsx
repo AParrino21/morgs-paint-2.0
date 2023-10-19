@@ -16,7 +16,9 @@ const Cart = () => {
 
   function removeFromCart(e: React.MouseEvent<HTMLElement>) {
     let newCart = cartItems!.filter(
-      (items: any) => items.id && items.id !== e.currentTarget.id || items._id && items._id !== e.currentTarget.id
+      (items: any) =>
+        (items.id && items.id !== e.currentTarget.id) ||
+        (items._id && items._id !== e.currentTarget.id)
     );
     setCartItems(newCart);
     localStorage.setItem(
@@ -26,19 +28,18 @@ const Cart = () => {
   }
 
   function checkOutNow() {
-    // fetch(URL + "create-checkout-session", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(cartItems),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     // redirecting the page using url from the backend
-    //     window.location.href = data.url;
-    //   });
+    fetch(URL + "create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartItems),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // redirecting the page using url from the backend
+        window.location.href = data.url;
+      });
     console.log(`${URL}create-checkout-session`);
   }
 

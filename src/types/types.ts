@@ -6,6 +6,7 @@ export interface PaintingData {
   price: number;
   quantity: number;
   price_id: string;
+  cat: string;
 }
 
 export interface childrenProps {
@@ -48,4 +49,5 @@ export interface AuthProviderProps {
   header: string;
   contactPic: string;
   galleryHeader: string;
+  subtractInventory: (data: GalleryData[] ) => void;
 }

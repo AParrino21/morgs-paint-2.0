@@ -5,11 +5,13 @@ import { GalleryData } from "../../types";
 import { Button } from "@mui/material";
 
 const Gallery = () => {
-  const { oils, mixedMedia, addToCart, galleryHeader } = React.useContext(AuthContext);
+  const { oils, mixedMedia, addToCart, galleryHeader, cartItems } =
+    React.useContext(AuthContext);
   const [paintingPage, setPaintingPage] = React.useState<number>(0);
   const [chosenPainting, setChosenPainting] = React.useState<
     GalleryData[] | null
   >(null);
+  const [paintingIsInCart, setPaintingIsInCart] = React.useState<boolean[]>([]);
 
   function viewGalleryPainting(e: React.MouseEvent<HTMLElement>) {
     const paitings: GalleryData[] = [];
@@ -20,7 +22,6 @@ const Gallery = () => {
       (paiting) => paiting._id === e.currentTarget.id
     );
 
-    console.log(clickedPainting);
     setPaintingPage(1);
 
     const allArt: GalleryData[] = [];
@@ -28,6 +29,12 @@ const Gallery = () => {
     mixedMedia.map((m) => allArt.push(m));
     const viewedPainting = allArt.filter((a) => a._id === e.currentTarget.id);
     setChosenPainting(viewedPainting);
+
+    let isInCart = cartItems.map(
+      (i: any) => i.name === clickedPainting[0].name
+    );
+    const resultArray = isInCart.filter((value: boolean) => value === true);
+    setPaintingIsInCart(resultArray);
   }
 
   return (
@@ -35,11 +42,7 @@ const Gallery = () => {
       {paintingPage === 0 && (
         <div>
           <div>
-            <img
-              className="header"
-              src={galleryHeader}
-              alt="header"
-            />
+            <img className="header" src={galleryHeader} alt="header" />
           </div>
           <div className="gallery-container">
             {mixedMedia?.map((mixed) => (
@@ -128,25 +131,50 @@ const Gallery = () => {
                 <p style={{ color: "red" }}>SOLD</p>
               )}
               <br />
-              <div className="gallery-btns">
-                <Button
-                  variant="outlined"
-                  color="success"
-                  onClick={() => addToCart(chosenPainting![0])}
-                >
-                  ADD TO CART
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => {
-                    setPaintingPage(0);
-                    setChosenPainting(null);
-                  }}
-                >
-                  GO BACK
-                </Button>
-              </div>
+              {chosenPainting![0].inventory != 0 ? (
+                <div className="gallery-btns">
+                  {paintingIsInCart[0] && (
+                    <Button disabled variant="outlined">
+                      IN CART!
+                    </Button>
+                  )}
+                  {paintingIsInCart?.length === 0 && (
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      onClick={() => {
+                        addToCart(chosenPainting![0]);
+                        setPaintingIsInCart([true]);
+                      }}
+                    >
+                      ADD TO CART
+                    </Button>
+                  )}
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => {
+                      setPaintingPage(0);
+                      setChosenPainting(null);
+                    }}
+                  >
+                    GO BACK
+                  </Button>
+                </div>
+              ) : (
+                <div className="gallery-btns">
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => {
+                      setPaintingPage(0);
+                      setChosenPainting(null);
+                    }}
+                  >
+                    GO BACK
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
