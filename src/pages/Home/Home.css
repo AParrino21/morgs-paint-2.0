@@ -1,14 +1,54 @@
+:root {
+  --text-color-light: rgb(115, 115, 115);
+}
+
 .home-header {
-    width: 100%;
+  width: 100%;
+}
+
+.home-welcome-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.home-welcome-text {
+  color: var(--text-color-light);
+}
+
+.home-welcome-name {
+  color: black;
+  font-weight: 600;
 }
 
 .featured-container {
-    margin: 25px;
-    text-align: center;
+  margin: 25px;
+  text-align: center;
 }
 
 .featured-img {
-    width: 90%;
-    max-width: 350px;
-    border-radius: 10px;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 10px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.featured-bio-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
+.featured-bio-text {
+  color: var(--text-color-light);
+}
+
+.homePageGalleryBtn {
+  padding: 10px;
+  font-weight: 600;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
 }

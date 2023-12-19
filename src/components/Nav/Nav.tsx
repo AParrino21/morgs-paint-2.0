@@ -100,7 +100,7 @@ const Nav = () => {
                 </Box>
               </div>
 
-              <div>
+              {/* <div>
                 <Box>
                   <ListItem
                     className="nav-item-series"
@@ -110,14 +110,14 @@ const Nav = () => {
                   </ListItem>
                   <Popper open={openSeries} anchorEl={anchorEl}>
                     <Box sx={{ border: 1, p: 0, bgcolor: "background.paper" }}>
-                      <Link className="nav-item" to="/">
+                      <Link className="nav-item" to="/birthday-girls">
                         <p className="nav-dropdown-item">Birthday Girls</p>
                       </Link>
                       <Divider />
                     </Box>
                   </Popper>
                 </Box>
-              </div>
+              </div> */}
             </>
           </ClickAwayListener>
           <div>

@@ -24,9 +24,9 @@ function App() {
       <Router>
         <Nav/>
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<CakeGirlSeries />} />
-          {/* <Route path="/happy-birthday" element={<CakeGirlSeries />} /> */}
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<CakeGirlSeries />} /> */}
+          <Route path="/birthday-girls" element={<CakeGirlSeries />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/thanks" element={<Thanks />} />

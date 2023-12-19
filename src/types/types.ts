@@ -34,6 +34,16 @@ export interface GalleryData {
   cat: string;
 }
 
+export interface ViewPaintingProps {
+  setPaintingPage: (page: number) => void;
+  setChosenPainting: (painting: GalleryData[] | null) => void;
+  chosenPainting: GalleryData[] | null;
+  viewGalleryPainting: any;
+  paintingIsInCart: boolean[];
+  addToCart: (painting: GalleryData | PaintingData) => void;
+  setPaintingIsInCart: any;
+}
+
 export interface AuthProviderProps {
   alertMessage: string;
   alertStatus: string;
@@ -49,5 +59,5 @@ export interface AuthProviderProps {
   header: string;
   contactPic: string;
   galleryHeader: string;
-  subtractInventory: (data: GalleryData[] ) => void;
+  subtractInventory: (data: GalleryData[]) => void;
 }
