@@ -14,6 +14,7 @@ import Privacy from "./pages/Legal/Privacy";
 import Cookies from "./pages/Legal/Cookies";
 import Contact from "./pages/Contact/Contact";
 import Returns from "./pages/Legal/Returns";
+import WeddingPortraits from "./pages/WeddingPortraits/WeddingPortraits";
 
 function App() {
   const { openAlert, setOpenAlert, alertMessage, alertStatus } =
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/" element={<CakeGirlSeries />} /> */}
+          <Route path="/wedding-portraits" element={<WeddingPortraits />} />
           <Route path="/birthday-girls" element={<CakeGirlSeries />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/cart" element={<Cart />} />

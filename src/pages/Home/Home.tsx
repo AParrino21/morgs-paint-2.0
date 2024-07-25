@@ -6,6 +6,8 @@ import ViewPainting from "../../components/ViewPainting/ViewPainting";
 import { Divider } from "@mui/material";
 import { GalleryData } from "../../types";
 
+const phi = "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
+
 const Home = () => {
   const { oils, mixedMedia, galleryHeader, addToCart, cartItems } =
     React.useContext(AuthContext);
@@ -64,6 +66,37 @@ const Home = () => {
                 elegance.
               </p>
             </div>
+            <Divider />
+            <div className="home-wedding-container">
+              <p className="home-wedding-title">
+                Now Accepting Wedding Portrait Commissions
+              </p>
+              <div className="home-wedding-content-container">
+                <div className="home-wedding-img-container">
+                  <img
+                    className="home-wedding-img"
+                    src={phi}
+                    alt="wedding-portrait"
+                  />
+                </div>
+                <div>
+                  <p className="home-wedding-subtext-title">I do.</p>
+                  <p className="home-wedding-subtext">
+                    ..Wedding Portraits! Each unique piece is
+                    meticulously hand-painted with oils on canvas.
+                  </p>
+                  <button
+                    className="homePageGalleryBtn"
+                    onClick={() =>
+                      (window.location.href = "/wedding-portraits")
+                    }
+                  >
+                    LEARN MORE
+                  </button>
+                </div>
+              </div>
+            </div>
+            <br />
             <div className="featured-container">
               <Divider />
               <br />
@@ -84,7 +117,7 @@ const Home = () => {
 
               <div className="featured-bio-container">
                 <p className="featured-bio-text">
-                  Introducing the latest masterpiece in my online Gallery:
+                  Introducing the latest masterpiece in Morgan's online Gallery:
                   "Reclamation of Autumn." This captivating creation, rendered
                   in oil on stretched canvas, incorporates meticulously placed
                   dried flowers and leaves, adding a touch of nature's beauty to
@@ -92,8 +125,8 @@ const Home = () => {
                 </p>
                 <br />
                 <h3>
-                  Check out my featured painting and the rest of my work in the
-                  Gallery!
+                  Check out Morgan's featured painting and the rest of her work
+                  in the Gallery!
                 </h3>
                 <br />
                 <button

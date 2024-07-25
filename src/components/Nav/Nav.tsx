@@ -55,6 +55,14 @@ const Nav = () => {
           </ListItem>
         </div>
         <div className="nav-links">
+          <div>
+            <ListItem className="nav-item-series">
+              <Link className="nav-item" to={"/wedding-portraits"}>
+                {" "}
+                Commissions{" "}
+              </Link>
+            </ListItem>
+          </div>
           <ClickAwayListener onClickAway={clickAwayHandler}>
             <>
               <div>
