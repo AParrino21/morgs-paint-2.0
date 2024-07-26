@@ -1,0 +1,25 @@
+.order-form-modal {
+    background-image: url('./forBG.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 999;
+}
+
+.order-inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.order-inputs {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.order-form-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

@@ -5,8 +5,7 @@ import CakeGirlSeries from "../CakeGirlSeries/CakeGirlSeries";
 import ViewPainting from "../../components/ViewPainting/ViewPainting";
 import { Divider } from "@mui/material";
 import { GalleryData } from "../../types";
-
-const phi = "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
+import WeddingImage from "./wedding.jpg"
 
 const Home = () => {
   const { oils, mixedMedia, galleryHeader, addToCart, cartItems } =
@@ -57,13 +56,14 @@ const Home = () => {
               <p className="home-welcome-text">
                 Welcome to{" "}
                 <span className="home-welcome-name">Morgan Danton's</span>{" "}
-                Online Art Gallery and Store-an immersive journey into the world
+                Online Art Gallery and Store
+                {/* -an immersive journey into the world
                 of captivating oil paintings. Explore the curated collection,
                 where each stroke tells a story and every canvas is a
                 masterpiece. Own a piece of art seamlessly with my user-friendly
                 store. Whether you're a seasoned collector or a first-time
                 buyer, I invite you to elevate your space with timeless
-                elegance.
+                elegance. */}
               </p>
             </div>
             <Divider />
@@ -75,7 +75,7 @@ const Home = () => {
                 <div className="home-wedding-img-container">
                   <img
                     className="home-wedding-img"
-                    src={phi}
+                    src={WeddingImage}
                     alt="wedding-portrait"
                   />
                 </div>
@@ -86,7 +86,7 @@ const Home = () => {
                     meticulously hand-painted with oils on canvas.
                   </p>
                   <button
-                    className="homePageGalleryBtn"
+                    className="learn-more-btn"
                     onClick={() =>
                       (window.location.href = "/wedding-portraits")
                     }
