@@ -11,12 +11,12 @@ import Size2 from "./size2.jpeg";
 
 const WeddingPortraits = () => {
   const [openOrderForm, setOpenOrderForm] = React.useState<boolean>(false);
-  const [priceChosen, setPriceChosen] = React.useState<number | undefined>()
+  const [priceChosen, setPriceChosen] = React.useState<number | undefined>();
   const handleClose = () => setOpenOrderForm(false);
 
   function handlePriceChosen(price: number) {
-    setOpenOrderForm(true)
-    setPriceChosen(price)
+    setOpenOrderForm(true);
+    setPriceChosen(price);
   }
 
   return (
@@ -70,7 +70,7 @@ const WeddingPortraits = () => {
         <p className="choose">Choose A Size to be Taken to the Order Form</p>
         <Divider />
         <div className="size-details-container">
-          <div>
+          <div onClick={() => handlePriceChosen(1800)} className="size-card">
             <p>Small</p>
             <p className="size18x24 size">18" x 24"</p>
             <button
@@ -80,7 +80,7 @@ const WeddingPortraits = () => {
               $ 1800
             </button>
           </div>
-          <div>
+          <div onClick={() => handlePriceChosen(2400)} className="size-card">
             <p>Medium</p>
             <p className="size24x30 size">24" x 30"</p>
             <button
@@ -90,7 +90,7 @@ const WeddingPortraits = () => {
               $ 2400
             </button>
           </div>
-          <div>
+          <div onClick={() => handlePriceChosen(3000)} className="size-card">
             <p>Large</p>
             <p className="size30x40 size">30" x 40"</p>
             <button
@@ -109,7 +109,11 @@ const WeddingPortraits = () => {
           </p>
         </div>
       </div>
-      <OrderFormModal open={openOrderForm} handleClose={handleClose} price={priceChosen} />
+      <OrderFormModal
+        open={openOrderForm}
+        handleClose={handleClose}
+        price={priceChosen}
+      />
     </div>
   );
 };

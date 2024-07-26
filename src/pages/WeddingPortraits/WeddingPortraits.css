@@ -107,13 +107,36 @@
   margin: 50px;
 }
 
+.size-card {
+    background-color: #f7e6e7;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 40px -20px;
+    cursor: pointer;
+}
+
+.size-card:hover {
+    background-color: #ffcdd3;
+}
+
+.size-card p:first-of-type{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-family: "Bad Script", cursive;
+}
+
+.size-card:hover p:first-child, .size-card:hover .size-btn {
+    background-color: black;
+    color: white;
+}
+
 .size {
   font-size: 50px;
   padding-top: 20px;
   padding-bottom: 40px;
   font-family: "Bad Script", cursive;
-  box-shadow: 0 0px -50px -6px black;
-  text-shadow: 0px 0px 30px #00ffc3;
 }
 
 .size-btn {
@@ -122,12 +145,7 @@
   font-family: "Bad Script", cursive;
   cursor: pointer;
   border-radius: 10px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 40px -20px;
-}
-
-.size-btn:hover {
-  background-color: black;
-  color: white;
+  background-color: white;
 }
 
 .order-time-text {

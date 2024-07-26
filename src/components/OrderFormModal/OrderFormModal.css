@@ -7,14 +7,14 @@
 }
 
 .order-form-title {
-  font-family: "Bad Script", arial;
+  font-family: "Bad Script", arial !important;
   font-size: 60px;
   text-shadow: 0px 0px 8px black;
   color: white;
 }
 
 .order-form-subtitle {
-  font-family: "Bad Script", arial;
+  font-family: "Bad Script", arial !important;
   font-size: 40px;
   text-shadow: 0px 0px 8px black;
   color: white;
