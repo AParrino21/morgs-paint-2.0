@@ -5,6 +5,12 @@
   padding: 15px;
 }
 
+.mobileNavContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .nav-links {
   display: flex;
   align-items: center;

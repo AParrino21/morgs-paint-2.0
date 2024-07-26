@@ -10,9 +10,10 @@ import {
   Popper,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NavMobile from "./NavMobile";
 
 const Nav = () => {
-  const { cartItems } = React.useContext(AuthContext);
+  const { cartItems, windowSize } = React.useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [openSeries, setOpenSeries] = React.useState<boolean>(false);
 
@@ -46,69 +47,91 @@ const Nav = () => {
 
   return (
     <>
-      <div className="nav-root">
-        <div>
-          <ListItem>
-            <Link className="nav-item" to="/">
-              MD
-            </Link>
-          </ListItem>
-        </div>
-        <div className="nav-links">
-          <div>
-            <ListItem className="nav-item-series">
-              <Link className="nav-item" to={"/wedding-portraits"}>
-                {" "}
-                Commissions{" "}
+      {windowSize?.width <= 855 ? (
+        <div className="mobileNavContainer">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <ListItem>
+              <Link className="nav-item" to="/">
+                MD
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link className="nav-item nav-item-cart" to="/cart">
+                <ShoppingCartIcon className="shopping-cart-icon" />
+                {cartItems?.length > 0 && (
+                  <p className="cart-length-nav">{cartItems?.length}</p>
+                )}
               </Link>
             </ListItem>
           </div>
-          <ClickAwayListener onClickAway={clickAwayHandler}>
-            <>
-              <div>
-                <Box>
-                  <ListItem
-                    className="nav-item-series"
-                    onClick={handleSocialsClick}
-                  >
-                    Socials
-                  </ListItem>
-                  <Popper open={openSocials} anchorEl={anchorElSocials}>
-                    <Box sx={{ border: 1, p: 0, bgcolor: "background.paper" }}>
-                      <Link
-                        className="nav-item"
-                        to="https://www.instagram.com/watchmorganpaint/"
+          <NavMobile />
+        </div>
+      ) : (
+        <div className="nav-root">
+          <div>
+            <ListItem>
+              <Link className="nav-item" to="/">
+                MD
+              </Link>
+            </ListItem>
+          </div>
+          <div className="nav-links">
+            <div>
+              <ListItem className="nav-item-series">
+                <Link className="nav-item" to={"/wedding-portraits"}>
+                  {" "}
+                  Commissions{" "}
+                </Link>
+              </ListItem>
+            </div>
+            <ClickAwayListener onClickAway={clickAwayHandler}>
+              <>
+                <div>
+                  <Box>
+                    <ListItem
+                      className="nav-item-series"
+                      onClick={handleSocialsClick}
+                    >
+                      Socials
+                    </ListItem>
+                    <Popper open={openSocials} anchorEl={anchorElSocials}>
+                      <Box
+                        sx={{ border: 1, p: 0, bgcolor: "background.paper" }}
                       >
-                        <p className="nav-dropdown-item">Instagram</p>
-                      </Link>
-                      <Divider />
-                      <Link
-                        className="nav-item"
-                        to="https://www.tiktok.com/@watchmorgspaint"
-                      >
-                        <p className="nav-dropdown-item">TikTok</p>
-                      </Link>
-                      <Divider />
-                      <Link
-                        className="nav-item"
-                        to="https://society6.com/morgandanton"
-                      >
-                        <p className="nav-dropdown-item">Society 6</p>
-                      </Link>
-                      <Divider />
-                      <Link
-                        className="nav-item"
-                        to="https://www.redbubble.com/people/morgandantonart/shop"
-                      >
-                        <p className="nav-dropdown-item">Red Bubble</p>
-                      </Link>
-                      <Divider />
-                    </Box>
-                  </Popper>
-                </Box>
-              </div>
+                        <Link
+                          className="nav-item"
+                          to="https://www.instagram.com/watchmorganpaint/"
+                        >
+                          <p className="nav-dropdown-item">Instagram</p>
+                        </Link>
+                        <Divider />
+                        <Link
+                          className="nav-item"
+                          to="https://www.tiktok.com/@watchmorgspaint"
+                        >
+                          <p className="nav-dropdown-item">TikTok</p>
+                        </Link>
+                        <Divider />
+                        <Link
+                          className="nav-item"
+                          to="https://society6.com/morgandanton"
+                        >
+                          <p className="nav-dropdown-item">Society 6</p>
+                        </Link>
+                        <Divider />
+                        <Link
+                          className="nav-item"
+                          to="https://www.redbubble.com/people/morgandantonart/shop"
+                        >
+                          <p className="nav-dropdown-item">Red Bubble</p>
+                        </Link>
+                        <Divider />
+                      </Box>
+                    </Popper>
+                  </Box>
+                </div>
 
-              {/* <div>
+                {/* <div>
                 <Box>
                   <ListItem
                     className="nav-item-series"
@@ -126,27 +149,28 @@ const Nav = () => {
                   </Popper>
                 </Box>
               </div> */}
-            </>
-          </ClickAwayListener>
-          <div>
-            <ListItem>
-              <Link className="nav-item" to="/gallery">
-                Gallery
-              </Link>
-            </ListItem>
-          </div>
-          <div>
-            <ListItem>
-              <Link className="nav-item nav-item-cart" to="/cart">
-                <ShoppingCartIcon className="shopping-cart-icon" />
-                {cartItems?.length > 0 && (
-                  <p className="cart-length-nav">{cartItems?.length}</p>
-                )}
-              </Link>
-            </ListItem>
+              </>
+            </ClickAwayListener>
+            <div>
+              <ListItem>
+                <Link className="nav-item" to="/gallery">
+                  Gallery
+                </Link>
+              </ListItem>
+            </div>
+            <div>
+              <ListItem>
+                <Link className="nav-item nav-item-cart" to="/cart">
+                  <ShoppingCartIcon className="shopping-cart-icon" />
+                  {cartItems?.length > 0 && (
+                    <p className="cart-length-nav">{cartItems?.length}</p>
+                  )}
+                </Link>
+              </ListItem>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <Divider />
     </>
   );

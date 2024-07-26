@@ -15,9 +15,10 @@ import Cookies from "./pages/Legal/Cookies";
 import Contact from "./pages/Contact/Contact";
 import Returns from "./pages/Legal/Returns";
 import WeddingPortraits from "./pages/WeddingPortraits/WeddingPortraits";
+import HamburgerMenuItems from "./components/HamburgerMenuItems/HamburgerMenuItems";
 
 function App() {
-  const { openAlert, setOpenAlert, alertMessage, alertStatus } =
+  const { openAlert, setOpenAlert, alertMessage, alertStatus, openMobileMenu } =
     React.useContext(AuthContext);
 
   return (
@@ -39,6 +40,11 @@ function App() {
           <Route path="/returns" element={<Returns />} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>
+        {openMobileMenu?.open && (
+          <div style={{ position: "absolute", top: "0px", right: "0" }}>
+            <HamburgerMenuItems sliding={openMobileMenu.sliding} />
+          </div>
+        )}
         <Footer />
       </Router>
       <Alert

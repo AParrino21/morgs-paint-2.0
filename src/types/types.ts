@@ -60,4 +60,10 @@ export interface AuthProviderProps {
   contactPic: string;
   galleryHeader: string;
   subtractInventory: (data: GalleryData[]) => void;
+  windowSize: { width: number; height: number };
+  handleOpenMenu: () => void;
+  openMobileMenu: {
+    sliding: boolean;
+    open: boolean;
+  };
 }

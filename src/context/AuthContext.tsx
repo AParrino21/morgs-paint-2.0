@@ -17,13 +17,46 @@ export const AuthProvider = ({ children }: childrenProps) => {
   const [paintings, setPaintings] = React.useState<PaintingData[]>([]);
   const [cartItems, setCartItems] = React.useState<PaintingData[]>([]);
   const [header, setHeader] = React.useState<string>("");
-  const [contactPic, setContactPic] = React.useState<string>("")
-  const [galleryHeader, setGalleryHeader] = React.useState<string>("")
+  const [contactPic, setContactPic] = React.useState<string>("");
+  const [galleryHeader, setGalleryHeader] = React.useState<string>("");
 
   const [oils, setOils] = React.useState([]);
   const [mixedMedia, setMixedMedia] = React.useState([]);
 
+  const [windowSize, setWindowSize] = React.useState<{
+    width: number;
+    height: number;
+  }>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  const [openMobileMenu, setOpenMobileMenu] = React.useState<{
+    sliding: boolean;
+    open: boolean;
+  }>({ sliding: false, open: false });
+
   const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
+
+  const handleOpenMenu = () => {
+    setOpenMobileMenu({
+      sliding: !openMobileMenu?.sliding,
+      open: !openMobileMenu?.open,
+    });
+  };
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   function setAlert(aStatus: string, aMessage: string) {
     setOpenAlert(true);
@@ -53,12 +86,16 @@ export const AuthProvider = ({ children }: childrenProps) => {
     try {
       const response = await axios.get(sUrl + "api/paintings/getCakeGirls");
       const headerResponse = await axios.get(sUrl + "api/paintings/getHeader");
-      const contactPicResponse = await axios.get(sUrl + "api/paintings/getContactPic")
-      const galleryHeaderResponse = await axios.get(sUrl + "api/paintings/getGalleryHeader")
+      const contactPicResponse = await axios.get(
+        sUrl + "api/paintings/getContactPic"
+      );
+      const galleryHeaderResponse = await axios.get(
+        sUrl + "api/paintings/getGalleryHeader"
+      );
       setPaintings(response.data);
       setHeader(headerResponse.data[0].header);
-      setContactPic(contactPicResponse.data[0].contactPicUrl)
-      setGalleryHeader(galleryHeaderResponse.data[0].galleryHeader)
+      setContactPic(contactPicResponse.data[0].contactPicUrl);
+      setGalleryHeader(galleryHeaderResponse.data[0].galleryHeader);
     } catch (error) {
       console.log(error);
     }
@@ -89,20 +126,20 @@ export const AuthProvider = ({ children }: childrenProps) => {
 
   const subtractInventory = async (data: GalleryData[] | PaintingData[]) => {
     try {
-      const response = await axios.put(sUrl + 'api/paintings/subtract', data)
-      console.log(response)
+      const response = await axios.put(sUrl + "api/paintings/subtract", data);
+      console.log(response);
       if (response) {
-        localStorage.clear()
-        setCartItems([])
-        
+        localStorage.clear();
+        setCartItems([]);
+
         getPaintings();
         getAllOils();
         getAllMixedMedia();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   React.useEffect(() => {
     getPaintings();
@@ -128,7 +165,10 @@ export const AuthProvider = ({ children }: childrenProps) => {
         header,
         contactPic,
         galleryHeader,
-        subtractInventory
+        subtractInventory,
+        windowSize,
+        handleOpenMenu,
+        openMobileMenu
       }}
     >
       {children}
