@@ -31,7 +31,7 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
     border: "1px solid #000",
     borderRadius: 5,
     boxShadow: 24,
-    p: 4,
+    p: 2,
   };
 
   return (
@@ -44,12 +44,7 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
       >
         <Box className="order-form-modal" sx={style}>
           <Typography
-            style={{
-              fontFamily: "Bad Script, arial",
-              fontSize: "60px",
-              textShadow: "0px 0px 8px black",
-              color: "white",
-            }}
+            className="order-form-title"
             id="modal-modal-title"
             variant="h6"
             component="h2"
@@ -57,12 +52,7 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
             Wedding Portrait
           </Typography>
           <Typography
-            style={{
-              fontFamily: "Bad Script, arial",
-              fontSize: "40px",
-              textShadow: "0px 0px 8px black",
-              color: "white",
-            }}
+            className="order-form-subtitle"
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
@@ -123,7 +113,7 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
           </div>
           <Stack justifyContent={"center"} direction="row" spacing={4}>
             <Button variant="contained">Add To Cart</Button>
-            <Button variant="contained" color="warning">
+            <Button onClick={() => handleClose(false)} variant="contained" color="warning">
               Cancel
             </Button>
           </Stack>

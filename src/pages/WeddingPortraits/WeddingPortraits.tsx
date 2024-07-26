@@ -71,6 +71,7 @@ const WeddingPortraits = () => {
         <Divider />
         <div className="size-details-container">
           <div>
+            <p>Small</p>
             <p className="size18x24 size">18" x 24"</p>
             <button
               onClick={() => handlePriceChosen(1800)}
@@ -80,6 +81,7 @@ const WeddingPortraits = () => {
             </button>
           </div>
           <div>
+            <p>Medium</p>
             <p className="size24x30 size">24" x 30"</p>
             <button
               onClick={() => handlePriceChosen(2400)}
@@ -89,6 +91,7 @@ const WeddingPortraits = () => {
             </button>
           </div>
           <div>
+            <p>Large</p>
             <p className="size30x40 size">30" x 40"</p>
             <button
               onClick={() => handlePriceChosen(3000)}

@@ -173,10 +173,10 @@
   }
 
   .size-details-container {
-    gap: 70px;
+    gap: 85px;
   }
 
   .size {
-    font-size: 25px;
+    font-size: 40px;
   }
 }
