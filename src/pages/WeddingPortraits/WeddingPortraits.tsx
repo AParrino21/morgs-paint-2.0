@@ -2,6 +2,7 @@ import React from "react";
 import "./WeddingPortraits.css";
 import { Divider } from "@mui/material";
 import OrderFormModal from "../../components/OrderFormModal/OrderFormModal";
+import { PortraitInfo } from "../../types";
 
 import WeddingFlowers from "./weddingFlowers.png";
 import AboutFlowers from "./weddingAbout.png";
@@ -9,14 +10,45 @@ import Artist from "./artist.jpg";
 import Size1 from "./size1.jpeg";
 import Size2 from "./size2.jpeg";
 
+import { AuthContext } from "../../context/AuthContext";
+
 const WeddingPortraits = () => {
   const [openOrderForm, setOpenOrderForm] = React.useState<boolean>(false);
-  const [priceChosen, setPriceChosen] = React.useState<number | undefined>();
-  const handleClose = () => setOpenOrderForm(false);
+  const [priceChosen, setPriceChosen] = React.useState<string | undefined>();
 
-  function handlePriceChosen(price: number) {
+  const { setOrderFormInfo } = React.useContext(AuthContext);
+
+  const handleClose = () => {
+    setOpenOrderForm(false);
+    setOrderFormInfo({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      occasion: "",
+      price: "",
+    });
+  };
+
+  function handlePriceChosen(price: string) {
     setOpenOrderForm(true);
     setPriceChosen(price);
+    setOrderFormInfo({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        occasion: "",
+        price: price,
+      });
   }
 
   return (
@@ -70,31 +102,31 @@ const WeddingPortraits = () => {
         <p className="choose">Choose A Size to be Taken to the Order Form</p>
         <Divider />
         <div className="size-details-container">
-          <div onClick={() => handlePriceChosen(1800)} className="size-card">
+          <div onClick={() => handlePriceChosen("1800")} className="size-card">
             <p>Small</p>
             <p className="size18x24 size">18" x 24"</p>
             <button
-              onClick={() => handlePriceChosen(1800)}
+              onClick={() => handlePriceChosen("1800")}
               className="size-btn"
             >
               $ 1800
             </button>
           </div>
-          <div onClick={() => handlePriceChosen(2400)} className="size-card">
+          <div onClick={() => handlePriceChosen("2400")} className="size-card">
             <p>Medium</p>
             <p className="size24x30 size">24" x 30"</p>
             <button
-              onClick={() => handlePriceChosen(2400)}
+              onClick={() => handlePriceChosen("2400")}
               className="size-btn"
             >
               $ 2400
             </button>
           </div>
-          <div onClick={() => handlePriceChosen(3000)} className="size-card">
+          <div onClick={() => handlePriceChosen("3000")} className="size-card">
             <p>Large</p>
             <p className="size30x40 size">30" x 40"</p>
             <button
-              onClick={() => handlePriceChosen(3000)}
+              onClick={() => handlePriceChosen("3000")}
               className="size-btn"
             >
               $ 3000
@@ -112,7 +144,6 @@ const WeddingPortraits = () => {
       <OrderFormModal
         open={openOrderForm}
         handleClose={handleClose}
-        price={priceChosen}
       />
     </div>
   );

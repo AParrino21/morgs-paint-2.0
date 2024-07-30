@@ -5,6 +5,7 @@ import {
   GalleryData,
   PaintingData,
   childrenProps,
+  PortraitInfo,
 } from "../types";
 import axios from "axios";
 
@@ -22,6 +23,19 @@ export const AuthProvider = ({ children }: childrenProps) => {
 
   const [oils, setOils] = React.useState([]);
   const [mixedMedia, setMixedMedia] = React.useState([]);
+
+  const [orderFormInfo, setOrderFormInfo] = React.useState<PortraitInfo>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    occasion: "",
+    price: "",
+  });
 
   const [windowSize, setWindowSize] = React.useState<{
     width: number;
@@ -168,7 +182,9 @@ export const AuthProvider = ({ children }: childrenProps) => {
         subtractInventory,
         windowSize,
         handleOpenMenu,
-        openMobileMenu
+        openMobileMenu,
+        orderFormInfo,
+        setOrderFormInfo,
       }}
     >
       {children}

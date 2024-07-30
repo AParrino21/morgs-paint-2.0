@@ -9,6 +9,19 @@ export interface PaintingData {
   cat: string;
 }
 
+export interface PortraitInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  occasion: string;
+  price: string;
+}
+
 export interface childrenProps {
   children: React.ReactNode;
 }
@@ -66,4 +79,6 @@ export interface AuthProviderProps {
     sliding: boolean;
     open: boolean;
   };
+  orderFormInfo: PortraitInfo;
+  setOrderFormInfo: any;
 }

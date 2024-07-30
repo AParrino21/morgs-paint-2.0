@@ -16,6 +16,7 @@ import Contact from "./pages/Contact/Contact";
 import Returns from "./pages/Legal/Returns";
 import WeddingPortraits from "./pages/WeddingPortraits/WeddingPortraits";
 import HamburgerMenuItems from "./components/HamburgerMenuItems/HamburgerMenuItems";
+import ThanksWedding from "./pages/Thanks/ThanksWedding";
 
 function App() {
   const { openAlert, setOpenAlert, alertMessage, alertStatus, openMobileMenu } =
@@ -33,6 +34,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/thanks" element={<Thanks />} />
+          <Route path="/thank-you-wedding" element={<ThanksWedding />} />
           <Route path="/terms-of-use" element={<Terms />} />
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/cookie-policy" element={<Cookies />} />

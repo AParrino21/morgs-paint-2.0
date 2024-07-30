@@ -8,17 +8,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { AuthContext } from "../../context/AuthContext";
+const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
 
 interface OrderFormModalProps {
   open: boolean;
   handleClose: (open: boolean) => void;
-  price: number | undefined;
 }
 
 const OrderFormModal: React.FC<OrderFormModalProps> = ({
   open,
   handleClose,
-  price,
 }) => {
   const style = {
     position: "absolute",
@@ -33,6 +33,37 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
     boxShadow: 24,
     p: 2,
   };
+  const { orderFormInfo, setOrderFormInfo } = React.useContext(AuthContext);
+
+  function handlePurchase() {
+    if (Object.values(orderFormInfo).every((value) => value !== "")) {
+      fetch(sUrl + "api/paintings/wedding", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(orderFormInfo),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // redirecting the page using url from the backend
+          console.log(data.url);
+          window.location.href = data.url;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  function handleInputChange(event: any) {
+    const { name, value } = event.target;
+    setOrderFormInfo((prevState: any) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
 
   return (
     <div>
@@ -63,44 +94,60 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
               className="order-inputs"
               label="First Name"
               variant="outlined"
+              name="firstName"
+              onChange={handleInputChange}
             />
             <TextField
               className="order-inputs"
               label="Last Name"
               variant="outlined"
+              name="lastName"
+              onChange={handleInputChange}
             />
             <div className="order-form-flex">
               <TextField
                 className="order-inputs"
                 label="Email"
                 variant="outlined"
+                name="email"
+                onChange={handleInputChange}
               />
               <TextField
                 className="order-inputs"
                 label="Phone Number"
                 variant="outlined"
+                name="phoneNumber"
+                onChange={handleInputChange}
               />
             </div>
             <TextField
               className="order-inputs"
               label="Recipient Street Address"
               variant="outlined"
+              name="address"
+              onChange={handleInputChange}
             />
             <div className="order-form-flex">
               <TextField
                 className="order-inputs"
                 label="City/Town"
                 variant="outlined"
+                name="city"
+                onChange={handleInputChange}
               />
               <TextField
                 className="order-inputs"
                 label="State"
                 variant="outlined"
+                name="state"
+                onChange={handleInputChange}
               />
               <TextField
                 className="order-inputs"
                 label="ZipCode"
                 variant="outlined"
+                name="zipCode"
+                onChange={handleInputChange}
               />
             </div>
             <TextField
@@ -109,11 +156,33 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
               variant="outlined"
               multiline
               rows={3}
+              name="occasion"
+              onChange={handleInputChange}
             />
           </div>
           <Stack justifyContent={"center"} direction="row" spacing={4}>
-            <Button variant="contained">Add To Cart</Button>
-            <Button onClick={() => handleClose(false)} variant="contained" color="warning">
+            <Button onClick={handlePurchase} variant="contained">
+              Checkout
+            </Button>
+            <Button
+              onClick={() => {
+                handleClose(false);
+                setOrderFormInfo({
+                  firstName: "",
+                  lastName: "",
+                  email: "",
+                  phoneNumber: "",
+                  address: "",
+                  city: "",
+                  state: "",
+                  zipCode: "",
+                  occasion: "",
+                  price: "",
+                });
+              }}
+              variant="contained"
+              color="warning"
+            >
               Cancel
             </Button>
           </Stack>
