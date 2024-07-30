@@ -3,30 +3,53 @@ import emailjs from "@emailjs/browser";
 import { AuthContext } from "../../context/AuthContext";
 
 const ThanksWedding = () => {
-  const { orderFormInfo } = React.useContext(AuthContext);
-
-  const orderFormInfoObj: any = {
-    firstName: orderFormInfo.firstName,
-    lastName: orderFormInfo.lastName,
-    email: orderFormInfo.email,
-    phoneNumber: orderFormInfo.phoneNumber,
-    address: orderFormInfo.address,
-    city: orderFormInfo.city,
-    state: orderFormInfo.state,
-    zipCode: orderFormInfo.zipCode,
-    occasion: orderFormInfo.occasion,
-    price: orderFormInfo.price,
-  };
+  const [orderFormInfoObj, setOrderFormInfoObj] = React.useState<any>();
 
   React.useEffect(() => {
-    sendEmail();
+    let data: any = localStorage.getItem("wedding-portrait-order-form");
+    if (!data) {
+      setOrderFormInfoObj({
+        firstName: "ERROR",
+        lastName: "ERROR",
+        email: "We have an error bahbee, come get me",
+        phoneNumber: "ERROR",
+        address: "ERROR",
+        city: "ERROR",
+        state: "ERROR",
+        zipCode: "ERROR",
+        occasion: "ERROR",
+        price: "ERROR",
+      });
+    } else {
+      data = JSON.parse(data);
+      setOrderFormInfoObj({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        zipCode: data.zipCode,
+        occasion: data.occasion,
+        price: data.price,
+      });
+    }
   }, []);
+
+  React.useEffect(() => {
+    if (orderFormInfoObj) {
+      if (Object.values(orderFormInfoObj).every((value) => value !== "")) {
+        sendEmail();
+      }
+    }
+  }, [orderFormInfoObj]);
 
   function sendEmail() {
     const form = document.createElement("form");
     form.style.display = "none";
 
-    Object.keys(orderFormInfo as any).forEach((key: any) => {
+    Object.keys(orderFormInfoObj as any).forEach((key: any) => {
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = key;

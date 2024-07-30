@@ -37,6 +37,11 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
 
   function handlePurchase() {
     if (Object.values(orderFormInfo).every((value) => value !== "")) {
+      localStorage.setItem(
+        "wedding-portrait-order-form",
+        JSON.stringify(orderFormInfo)
+      );
+
       fetch(sUrl + "api/paintings/wedding", {
         method: "POST",
         headers: {
