@@ -10,15 +10,17 @@ import {
 } from "@mui/material";
 import { AuthContext } from "../../context/AuthContext";
 const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
-
+import { FileUploader } from "react-drag-drop-files";
 interface OrderFormModalProps {
   open: boolean;
   handleClose: (open: boolean) => void;
+  setFile: (file: any) => void;
 }
 
 const OrderFormModal: React.FC<OrderFormModalProps> = ({
   open,
   handleClose,
+  setFile,
 }) => {
   const style = {
     position: "absolute",
@@ -34,6 +36,8 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
     p: 2,
   };
   const { orderFormInfo, setOrderFormInfo } = React.useContext(AuthContext);
+
+  const imageFileTypes = ["JPG", "PNG", "JPEG", "jpeg", "png", "jpg"];
 
   function handlePurchase() {
     if (Object.values(orderFormInfo).every((value) => value !== "")) {
@@ -70,6 +74,13 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
     }));
   }
 
+  const handleChange = (file: any) => {
+    setFile(file);
+    var reader = new FileReader();
+    var url = reader.readAsDataURL(file);
+    console.log(url)
+  };
+
   return (
     <div>
       <Modal
@@ -95,20 +106,32 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
             Order Sheet
           </Typography>
           <div className="order-inputs-container">
-            <TextField
-              className="order-inputs"
-              label="First Name"
-              variant="outlined"
-              name="firstName"
-              onChange={handleInputChange}
-            />
-            <TextField
-              className="order-inputs"
-              label="Last Name"
-              variant="outlined"
-              name="lastName"
-              onChange={handleInputChange}
-            />
+            <div className="file-uploader">
+              <FileUploader
+                handleChange={handleChange}
+                name="file"
+                types={imageFileTypes}
+                onTypeError={(error: any) => console.log(error)}
+                label={"Upload Photo"}
+                required
+              />
+            </div>
+            <div className="order-form-flex">
+              <TextField
+                className="order-inputs"
+                label="First Name"
+                variant="outlined"
+                name="firstName"
+                onChange={handleInputChange}
+              />
+              <TextField
+                className="order-inputs"
+                label="Last Name"
+                variant="outlined"
+                name="lastName"
+                onChange={handleInputChange}
+              />
+            </div>
             <div className="order-form-flex">
               <TextField
                 className="order-inputs"

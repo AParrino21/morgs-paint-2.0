@@ -9,16 +9,21 @@ import AboutFlowers from "./weddingAbout.png";
 import Artist from "./artist.jpg";
 import Size1 from "./size1.jpeg";
 import Size2 from "./size2.jpeg";
+import WeddingImage from "../Home/wedding.jpg";
+import weddingPort from "./weddingPort.jpeg";
+import weddingVid from "./weddingVid.mp4";
 
 import { AuthContext } from "../../context/AuthContext";
 
 const WeddingPortraits = () => {
   const [openOrderForm, setOpenOrderForm] = React.useState<boolean>(false);
   const [priceChosen, setPriceChosen] = React.useState<string | undefined>();
+  const [file, setFile] = React.useState<any>(null);
 
   const { setOrderFormInfo } = React.useContext(AuthContext);
 
   const handleClose = () => {
+    setFile(null);
     setOpenOrderForm(false);
     setOrderFormInfo({
       firstName: "",
@@ -38,17 +43,17 @@ const WeddingPortraits = () => {
     setOpenOrderForm(true);
     setPriceChosen(price);
     setOrderFormInfo({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        address: "",
-        city: "",
-        state: "",
-        zipCode: "",
-        occasion: "",
-        price: price,
-      });
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      occasion: "",
+      price: price,
+    });
   }
 
   return (
@@ -140,10 +145,28 @@ const WeddingPortraits = () => {
             shipped.
           </p>
         </div>
+        <div className="featured-comission-title">
+          <Divider />
+          <p className="choose">Featured Comissions</p>
+          <Divider />
+        </div>
+        <div className="wedding-arts-container">
+          <img className="wedding-image" src={WeddingImage} alt="weddingpic1" />
+          <video
+            className="video-file"
+            controls
+            muted
+            autoPlay
+            loop
+            src={weddingVid}
+          />
+          <img className="wedding-image" src={weddingPort} alt="weddingpic2" />
+        </div>
       </div>
       <OrderFormModal
         open={openOrderForm}
         handleClose={handleClose}
+        setFile={setFile}
       />
     </div>
   );

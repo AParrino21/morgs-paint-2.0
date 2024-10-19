@@ -47,3 +47,12 @@
   align-items: center;
   gap: 10px;
 }
+
+.file-uploader {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.file-uploader > label {
+  min-width: 0 !important;
+}
