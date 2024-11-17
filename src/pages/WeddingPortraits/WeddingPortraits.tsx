@@ -18,9 +18,8 @@ import { AuthContext } from "../../context/AuthContext";
 const WeddingPortraits = () => {
   const [openOrderForm, setOpenOrderForm] = React.useState<boolean>(false);
   const [priceChosen, setPriceChosen] = React.useState<string | undefined>();
-  const [file, setFile] = React.useState<any>(null);
 
-  const { setOrderFormInfo } = React.useContext(AuthContext);
+  const { setOrderFormInfo, setFile } = React.useContext(AuthContext);
 
   const handleClose = () => {
     setFile(null);
@@ -35,6 +34,7 @@ const WeddingPortraits = () => {
       state: "",
       zipCode: "",
       occasion: "",
+      image: "",
       price: "",
     });
   };
@@ -52,6 +52,7 @@ const WeddingPortraits = () => {
       state: "",
       zipCode: "",
       occasion: "",
+      image: "",
       price: price,
     });
   }
@@ -166,7 +167,6 @@ const WeddingPortraits = () => {
       <OrderFormModal
         open={openOrderForm}
         handleClose={handleClose}
-        setFile={setFile}
       />
     </div>
   );

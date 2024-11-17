@@ -1,12 +1,14 @@
 import React from "react";
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 import { AuthContext } from "../../context/AuthContext";
 
 const ThanksWedding = () => {
+  const { sendClientsWeddingData, file } = React.useContext(AuthContext)
   const [orderFormInfoObj, setOrderFormInfoObj] = React.useState<any>();
 
   React.useEffect(() => {
     let data: any = localStorage.getItem("wedding-portrait-order-form");
+    let imageData: any = localStorage.getItem("wedding-portrait-order-form-image");
     if (!data) {
       setOrderFormInfoObj({
         firstName: "ERROR",
@@ -18,6 +20,7 @@ const ThanksWedding = () => {
         state: "ERROR",
         zipCode: "ERROR",
         occasion: "ERROR",
+        image: "ERROR",
         price: "ERROR",
       });
     } else {
@@ -32,6 +35,7 @@ const ThanksWedding = () => {
         state: data.state,
         zipCode: data.zipCode,
         occasion: data.occasion,
+        image: imageData,
         price: data.price,
       });
     }
@@ -40,49 +44,50 @@ const ThanksWedding = () => {
   React.useEffect(() => {
     if (orderFormInfoObj) {
       if (Object.values(orderFormInfoObj).every((value) => value !== "")) {
-        sendEmail();
+        // sendEmail();
+        sendClientsWeddingData({ ...orderFormInfoObj, file })
       }
     }
   }, [orderFormInfoObj]);
 
-  function sendEmail() {
-    const form = document.createElement("form");
-    form.style.display = "none";
+  // function sendEmail() {
+  //   const form = document.createElement("form");
+  //   form.style.display = "none";
 
-    Object.keys(orderFormInfoObj as any).forEach((key: any) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = key;
-      input.value = orderFormInfoObj[key];
-      form.appendChild(input);
-    });
-    document.body.appendChild(form);
+  //   Object.keys(orderFormInfoObj as any).forEach((key: any) => {
+  //     const input = document.createElement("input");
+  //     input.type = "hidden";
+  //     input.name = key;
+  //     input.value = orderFormInfoObj[key];
+  //     form.appendChild(input);
+  //   });
+  //   document.body.appendChild(form);
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_APP_EMAIL_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAIL_TEMPLATE,
-        form,
-        {
-          publicKey: import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY,
-        }
-      )
-      .then(
-        () => {
-          console.log("SUCCESS!");
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
-  }
+  //   emailjs
+  //     .sendForm(
+  //       import.meta.env.VITE_APP_EMAIL_SERVICE_ID,
+  //       import.meta.env.VITE_APP_EMAIL_TEMPLATE,
+  //       form,
+  //       {
+  //         publicKey: import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY,
+  //       }
+  //     )
+  //     .then(
+  //       () => {
+  //         console.log("SUCCESS!");
+  //       },
+  //       (error) => {
+  //         console.log("FAILED...", error.text);
+  //       }
+  //     );
+  // }
 
   return (
     <div style={{ textAlign: "center", padding: "150px 50px" }}>
       <h1>Thank you for your purchase!</h1>
       <br />
       <br />
-      <p style={{ fontWeight: "600" }}>Check your email for your receipt.</p>
+      <p style={{ fontWeight: "600" }}>Check your email for your order confirmation.</p>
       <br />
       <br />
       <h5>

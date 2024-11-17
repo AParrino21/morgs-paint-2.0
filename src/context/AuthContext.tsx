@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }: childrenProps) => {
     state: "",
     zipCode: "",
     occasion: "",
+    image: "",
     price: "",
   });
 
@@ -48,8 +49,10 @@ export const AuthProvider = ({ children }: childrenProps) => {
     sliding: boolean;
     open: boolean;
   }>({ sliding: false, open: false });
+  const [file, setFile] = React.useState<any>(null);
 
   const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
+  // const sUrl = "http://localhost:3001/";
 
   const handleOpenMenu = () => {
     setOpenMobileMenu({
@@ -155,6 +158,18 @@ export const AuthProvider = ({ children }: childrenProps) => {
     }
   };
 
+  const sendClientsWeddingData = async (clientForm: any) => {
+    try {
+      const response = await axios.post(
+        sUrl + "api/paintings/sendWeddingData",
+        clientForm
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   React.useEffect(() => {
     getPaintings();
     getCartItems();
@@ -185,6 +200,9 @@ export const AuthProvider = ({ children }: childrenProps) => {
         openMobileMenu,
         orderFormInfo,
         setOrderFormInfo,
+        sendClientsWeddingData,
+        file, 
+        setFile
       }}
     >
       {children}

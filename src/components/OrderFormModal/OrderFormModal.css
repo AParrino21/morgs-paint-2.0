@@ -56,3 +56,10 @@
 .file-uploader > label {
   min-width: 0 !important;
 }
+
+.delete-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}

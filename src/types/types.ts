@@ -19,6 +19,7 @@ export interface PortraitInfo {
   state: string;
   zipCode: string;
   occasion: string;
+  image: any;
   price: string;
 }
 
@@ -79,6 +80,10 @@ export interface AuthProviderProps {
     sliding: boolean;
     open: boolean;
   };
-  orderFormInfo: PortraitInfo;
+  // orderFormInfo: PortraitInfo;
+  orderFormInfo: any;
   setOrderFormInfo: any;
+  sendClientsWeddingData: (clientForm: any) => void;
+  file: any;
+  setFile: (file:any) => void;
 }

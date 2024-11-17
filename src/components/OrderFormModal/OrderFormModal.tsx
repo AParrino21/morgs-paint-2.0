@@ -11,16 +11,17 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 const sUrl = import.meta.env.VITE_APP_MORGS_SERVER;
 import { FileUploader } from "react-drag-drop-files";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 interface OrderFormModalProps {
   open: boolean;
   handleClose: (open: boolean) => void;
-  setFile: (file: any) => void;
 }
 
 const OrderFormModal: React.FC<OrderFormModalProps> = ({
   open,
   handleClose,
-  setFile,
 }) => {
   const style = {
     position: "absolute",
@@ -35,16 +36,34 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
     boxShadow: 24,
     p: 2,
   };
-  const { orderFormInfo, setOrderFormInfo } = React.useContext(AuthContext);
+  const {
+    orderFormInfo,
+    setOrderFormInfo,
+    sendClientsWeddingData,
+    file,
+    setFile,
+  } = React.useContext(AuthContext);
+  const [testFile, setTestFile] = React.useState<any>("");
 
   const imageFileTypes = ["JPG", "PNG", "JPEG", "jpeg", "png", "jpg"];
 
   function handlePurchase() {
-    if (Object.values(orderFormInfo).every((value) => value !== "")) {
+    if (
+      Object.entries(orderFormInfo).every(
+        ([key, value]) => key === "image" || value !== ""
+      ) &&
+      testFile !== ""
+    ) {
       localStorage.setItem(
         "wedding-portrait-order-form",
         JSON.stringify(orderFormInfo)
       );
+      localStorage.setItem(
+        "wedding-portrait-order-form-image",
+        JSON.stringify(testFile)
+      );
+
+      // sendClientsWeddingData({ ...orderFormInfo, testFile });
 
       fetch(sUrl + "api/paintings/wedding", {
         method: "POST",
@@ -63,6 +82,8 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      console.log("missing fields");
     }
   }
 
@@ -75,10 +96,13 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
   }
 
   const handleChange = (file: any) => {
-    setFile(file);
-    var reader = new FileReader();
-    var url = reader.readAsDataURL(file);
-    console.log(url)
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64Image = reader.result;
+      setTestFile(base64Image);
+      setFile(base64Image);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -106,16 +130,26 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
             Order Sheet
           </Typography>
           <div className="order-inputs-container">
-            <div className="file-uploader">
-              <FileUploader
-                handleChange={handleChange}
-                name="file"
-                types={imageFileTypes}
-                onTypeError={(error: any) => console.log(error)}
-                label={"Upload Photo"}
-                required
-              />
-            </div>
+            {file && (
+              <div className="delete-btn-container">
+                <img style={{ width: "100px" }} src={testFile} alt="test" />
+                <IconButton onClick={() => setFile(null)} aria-label="delete">
+                  <DeleteIcon style={{ color: "red", fontSize: "50px" }} />
+                </IconButton>
+              </div>
+            )}
+            {!file && (
+              <div className="file-uploader">
+                <FileUploader
+                  handleChange={handleChange}
+                  name="image"
+                  types={imageFileTypes}
+                  onTypeError={(error: any) => console.log(error)}
+                  label={"Upload Photo"}
+                  required
+                />
+              </div>
+            )}
             <div className="order-form-flex">
               <TextField
                 className="order-inputs"
