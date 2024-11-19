@@ -45,7 +45,7 @@ const ThanksWedding = () => {
     if (orderFormInfoObj) {
       if (Object.values(orderFormInfoObj).every((value) => value !== "")) {
         // sendEmail();
-        sendClientsWeddingData({ ...orderFormInfoObj, file })
+        sendClientsWeddingData({ ...orderFormInfoObj, file: localStorage.getItem("wedding-portrait-order-form-image") })
       }
     }
   }, [orderFormInfoObj]);
