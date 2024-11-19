@@ -76,7 +76,6 @@ const OrderFormModal: React.FC<OrderFormModalProps> = ({
         .then((res) => res.json())
         .then((data) => {
           // redirecting the page using url from the backend
-          console.log(data.url);
           window.location.href = data.url;
         })
         .catch((err) => {
