@@ -121,6 +121,9 @@ const HamburgerMenuItems: React.FC<HamburgerMenuItemsProps> = ({ sliding }) => {
                 <ListItem onClick={() => navigate("/gallery")}>
                   <p>Gallery</p>
                 </ListItem>
+                <ListItem onClick={() => navigate("/birthday-girls")}>
+                  <p>Birthday Girls</p>
+                </ListItem>
                 <ListItem
                   onClick={() =>
                     (window.location.href =

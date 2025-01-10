@@ -9,8 +9,9 @@
 
 .checkout-container {
   display: flex;
-  justify-content: flex-end;
-  margin: 8px 15px;
+  justify-content: center;
+  margin: 15px;
+  margin-bottom: 30px;
   align-items: center;
 }
 

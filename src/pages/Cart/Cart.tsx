@@ -56,11 +56,7 @@ const Cart = () => {
             <h2>MY CART</h2>
           </div>
           <Divider />
-          <div className="checkout-container">
-            <Button variant="outlined" color="success" onClick={checkOutNow}>
-              CHECK OUT
-            </Button>
-          </div>
+
           {cartItems?.map((item: any) => (
             <Card
               key={item?.id}
@@ -123,6 +119,11 @@ const Cart = () => {
               </CardActions>
             </Card>
           ))}
+          <div className="checkout-container">
+            <Button variant="outlined" color="success" onClick={checkOutNow}>
+              CHECK OUT
+            </Button>
+          </div>
         </>
       )}
     </div>

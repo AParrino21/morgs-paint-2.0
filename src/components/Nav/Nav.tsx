@@ -131,7 +131,7 @@ const Nav = () => {
                   </Box>
                 </div>
 
-                {/* <div>
+                <div>
                 <Box>
                   <ListItem
                     className="nav-item-series"
@@ -148,7 +148,7 @@ const Nav = () => {
                     </Box>
                   </Popper>
                 </Box>
-              </div> */}
+              </div>
               </>
             </ClickAwayListener>
             <div>
