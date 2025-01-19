@@ -100,7 +100,7 @@ const Nav = () => {
                       >
                         <Link
                           className="nav-item"
-                          to="https://www.instagram.com/watchmorganpaint/"
+                          to="https://www.instagram.com/morgandantonpaintings/"
                         >
                           <p className="nav-dropdown-item">Instagram</p>
                         </Link>
